@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b0c">
+  <meta name="description" content="Kitoid Burst — grow a nine-eyed creature, skim mountain ridges, and burst through an endless procedural world. Play free in your browser.">
+  <meta property="og:title" content="Kitoid Burst">
+  <meta property="og:description" content="Nine eyes. Sixty-seven ways to grow. Find your line through an endless procedural world.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iskamag.com/games/kitoid-burst/">
+  <meta property="og:image" content="https://iskamag.com/games/kitoid-burst/preview.jpg">
+  <link rel="canonical" href="https://iskamag.com/games/kitoid-burst/">
+  <title>Kitoid Burst — a strange expanse</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23d1f0bd' d='M8 52V10L24 23H40L56 10V52Z'/%3E%3Ccircle cx='22' cy='35' r='4'/%3E%3Ccircle cx='42' cy='35' r='4'/%3E%3Ccircle cx='32' cy='25' r='4'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="world" tabindex="0" aria-label="A nine-eyed kitoid flying over a colored heightfield. WASD steers, Q and E roll, Space brakes."></canvas>
+  <div id="veil"></div>
+  <header class="masthead">
+    <a class="wordmark" href="./" aria-label="Kitoid Burst home">KITOID <span class="serif">BURST</span></a>
+    <nav><button id="open-lab" title="Genome editor (G)">GENOME</button><button id="help-toggle" aria-label="Pause and show controls" title="Controls (H)">?</button><button id="weather" title="Cycle light, depth, and dense distance fog (F)">FOG <span>DEPTH</span></button><button id="sound" aria-pressed="true" title="Toggle synthesized flight audio">SOUND <span>ON</span></button><button id="fullscreen" title="Fullscreen">⛶</button></nav>
+  </header>
+  <section id="intro" class="intro">
+    <div class="eyebrow"><span class="line"></span> A PROCEDURAL FLIGHT EXPERIMENT</div>
+    <h1>A strange<br><em>expanse.</em></h1>
+    <p>Nine eyes. Sixty-seven ways to grow.<br>Somewhere between a cat and a thought.</p>
+    <div class="launch-row"><button id="launch" class="primary">TAKE FLIGHT <span>↗</span></button></div>
+    <div class="intro-note"><span>01 /</span> <span id="intro-region">THE COPPER BASIN</span> <span class="note-rule"></span> HEIGHTFIELD EXCURSION</div>
+  </section>
+  <div id="flight-hud" class="hidden">
+    <div class="telemetry"><div><b id="speed">0</b><small>m/s</small><span class="altitude">ALT <b id="altitude">0</b><small>m</small></span></div><span id="flight-state"></span></div>
+    <div class="bearing"><span id="bearing-arrow">↑</span><span id="bearing-label">NEXT GATE</span></div>
+    <div class="route"><button class="eyebrow" id="route-name" title="Change route (N)">THE COPPER CUT ↻</button><div><b id="gates">00</b><small id="gate-total">/ 07</small></div><div class="route-meta"><span id="timer">00:00.00</span><span id="flow-score">Score 0</span></div></div>
+    <div class="flow"><span class="eyebrow">BURST</span><div class="energy-track" role="progressbar" aria-label="Burst reserve" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="energy-meter"></i></div><span id="flow-label"></span></div>
+    <div id="message" role="status"></div>
+    <div id="timeout" class="hidden" role="status"><span>TIMEOUT</span><strong id="timeout-count">1.2</strong><small id="timeout-surface"></small></div>
+  </div>
+  <aside id="lab" class="hidden" aria-label="Kitoid genome editor">
+    <div class="lab-header"><div><span class="eyebrow" id="seed-label">SEED 0617</span><h2>The genome</h2></div><button id="close-lab" title="Close genome editor">×</button></div>
+    <p class="lab-description" id="phenotype-label">Growing nine ways to see.</p>
+    <div class="lab-actions"><button id="mutate" title="Mutate a small set of alleles within one regulatory module">MUTATE ↗</button><button id="cross" disabled title="Keep a parent first, then cross it with another specimen">CROSS</button><button id="regrow">REGROW ↻</button></div>
+    <div class="lineage"><span id="lineage">GEN 0 · FOUNDER</span><button id="keep-parent">KEEP PARENT</button></div>
+    <div class="development"><label for="development-stage"><span id="development-label">MATURE</span><output id="development-percent">100%</output></label><input id="development-stage" aria-label="Developmental stage" type="range" min="0" max="1" step="0.01" value="1"></div>
+    <div class="founders"><label for="bodyplan">FOUNDER</label><select id="bodyplan"><option value="mantle">Mantle</option><option value="spindle">Spindle</option><option value="corolla">Corolla</option></select><button id="new-seed">RANDOM ↻</button><button id="reset-genes" title="Restore the original founder">RESET</button><button id="open-atlas">ATLAS ↗</button></div>
+    <div id="gene-controls"></div>
+    <div class="lab-footer"><button id="export">EXPORT GENOME ↓</button><label>IMPORT ↑<input id="import" type="file" accept="application/json,.json"></label><span id="growth-state"></span></div>
+  </aside>
+  <aside id="atlas" class="hidden" role="dialog" aria-modal="true" aria-labelledby="atlas-title">
+    <div class="atlas-sheet"><header><div><span class="eyebrow">EIGHT DIFFERENT POSSIBILITIES</span><h2 id="atlas-title">The seed atlas.</h2></div><button id="more-seeds">MORE SEEDS ↻</button><button id="close-atlas" aria-label="Close seed atlas">×</button></header><p>Choose a specimen to grow. Keep a parent in the genome editor to cross its traits with another.</p><div id="atlas-grid"></div></div>
+  </aside>
+  <div id="touch-controls"><div id="touch-stick"><i></i></div><div class="touch-buttons"><div class="touch-rolls"><button id="touch-roll-left" aria-label="Roll left">↶</button><button id="touch-roll-right" aria-label="Roll right">↷</button></div><button id="touch-boost">BURST</button><button id="touch-brake">BRAKE</button></div></div>
+  <div id="help" class="hidden"><div><span class="eyebrow">FLIGHT MANUAL</span><h2>Find your line.</h2><p><kbd>W / S</kbd> Pitch up / down<br><kbd>A / D</kbd> Turn left / right<br><kbd>SHIFT</kbd> Burst · <kbd>SPACE / X</kbd> Airbrake<br><kbd>Q / E</kbd> or <kbd>Z / C</kbd> Hold to roll · double tap to spin<br><kbd>DRAG</kbd> Look · <kbd>WHEEL</kbd> Zoom<br><kbd>V / DOUBLE TAP</kbd> Reset camera<br>Two-finger look / pinch to zoom<br><kbd>B</kbd> Enable / disable horizon assist<br><kbd>N</kbd> Another route · <kbd>R</kbd> Retry<br><kbd>G</kbd> Grow · <kbd>F</kbd> Distance fog<br><kbd>P / ESC</kbd> Pause · <kbd>H</kbd> Manual</p><p class="flight-tip">Gamepad: left stick steers, right stick looks. Bumpers roll; RT / A bursts, LT / B brakes. Start pauses, X retries, Y opens genome, D-pad up/down zooms, right changes route. Back / R3 resets the camera.</p><p class="flight-tip">Bank, then pitch to bend your flight path. Brake for tighter turns; burst carries more momentum. Skim rock to recharge burst. Fast wall hits bounce you away and briefly disable control; brake for gentle contact. Explore beyond the ridges to discover new reaches; the world keeps going.</p><button id="resume" class="primary">BACK TO FLIGHT ↗</button></div></div>
+  <div id="loading"><span>KITOID BURST</span><p>Growing a small impossibility…</p></div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

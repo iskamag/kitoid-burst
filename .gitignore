@@ -1,0 +1,12 @@
+node_modules/
+artifacts/
+dist/
+.agents/
+.codex/
+.aws/
+.env
+.env.*
+assets/terrain/catoid-eroded-field-3/
+assets/terrain/catoid-eroded-field-4/
+assets/terrain/catoid-eroded-field-5/
+*.log

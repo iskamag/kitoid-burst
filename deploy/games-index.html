@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browser games from Iska: Kitoid Burst, Snep, Vernelab, and Play with Chen.">
+  <title>Games — Iska's place</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    *{box-sizing:border-box}body{font-family:"Trebuchet MS",Arial,sans-serif}
+    main{width:min(1050px,calc(100% - 32px));margin:40px auto;padding:28px;background:var(--color-panel-bg,#181825);color:var(--color-text-main,#e2e4d7);border-radius:8px;box-shadow:0 8px 30px #24354030}
+    nav{display:flex;gap:20px;font-size:14px}nav a{color:#b8d9da}h1{font-size:42px;margin:28px 0 12px}p{text-align:left;padding:0;line-height:1.6}a:focus-visible{outline:2px solid #d7efad;outline-offset:5px}
+    .featured{display:grid;grid-template-columns:1.3fr 1fr;margin:28px 0;background:#27363b;border:1px solid #526968;border-radius:5px;overflow:hidden}
+    .featured img{display:block;width:100%;height:100%;min-height:260px;object-fit:cover;image-rendering:auto}.info{padding:25px}.tag{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d7efad}h2{font-size:28px;margin:12px 0}h3{margin:0 0 10px;font-size:22px}
+    .links{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:22px}.play{display:inline-block;background:#d7efad;color:#162216;font-weight:bold;padding:12px 18px;border-radius:3px}.source{color:#b8d9da;text-decoration:underline}.requirements{font-size:13px;margin-top:14px;color:#c0cbc8}
+    .more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.game{padding:22px;background:#27313d;border:1px solid #485464;border-radius:5px}.game a{display:inline-block;margin-top:18px;color:#d7efad;text-decoration:underline}
+    @media(max-width:720px){main{padding:20px;margin:16px auto}.featured,.more{grid-template-columns:1fr}.featured img{min-height:0}.info{padding:22px}h1{font-size:36px}}
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Site"><a href="/">← Iska's place</a><a href="https://github.com/iskamag">GitHub</a></nav>
+    <h1>Games</h1>
+    <p>Small worlds to explore, experiment with, and play in your browser.</p>
+    <article class="featured">
+      <a href="./kitoid-burst/" aria-label="Play Kitoid Burst"><img src="./kitoid-burst/preview.jpg" alt="Kitoid Burst: a nine-eyed creature above a copper-and-teal mountain landscape" width="1280" height="800"></a>
+      <div class="info">
+        <span class="tag">Flight · exploration · procedural creatures</span>
+        <h2>Kitoid Burst</h2>
+        <p>Grow a nine-eyed creature. Skim ridges, burst through gates, and find your line through an endless mountain world. Sixty-seven genes make each specimen your own.</p>
+        <div class="links"><a class="play" href="./kitoid-burst/">Take flight ↗</a><a class="source" href="https://github.com/iskamag/kitoid-burst">Source code</a></div>
+        <p class="requirements">WebGL 2 · Keyboard, touch, and gamepad</p>
+      </div>
+    </article>
+    <div class="more">
+      <article class="game"><h3>Snep</h3><p>Blossom Street.</p><a href="./snep/">Play Snep ↗</a></article>
+      <article class="game"><h3>Vernelab</h3><p>Flame-Fusion Atelier.</p><a href="./vernelab/">Open Vernelab ↗</a></article>
+      <article class="game"><h3>Play with Chen</h3><p>A game of chess against Chen.</p><a href="./play-with-chen/">Play chess ↗</a></article>
+    </div>
+  </main>
+</body>
+</html>

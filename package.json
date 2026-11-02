@@ -1,0 +1,34 @@
+{
+  "name": "kitoid-burst",
+  "version": "0.6.2",
+  "private": true,
+  "type": "module",
+  "description": "Grow a nine-eyed creature and fly through an endless procedural world.",
+  "license": "MIT",
+  "homepage": "https://iskamag.com/games/kitoid-burst/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iskamag/kitoid-burst.git"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "build": "node scripts/build-static.mjs",
+    "check": "node --check server.mjs && node --check src/main.js && node --check src/catoid.js && node --check src/terrain.js && node --check src/heightfield.js && node --check src/terrain-worker.js && node --check src/world.js && node --check src/genes.js && node --check src/audio.js && node --check src/gamepad.js && node --check src/flight.js && node --check src/development.js && node --check src/atmosphere.js && node --check src/atlas.js && node --check src/frame-timing.js && node --check src/geometry-batch.js && node --check src/terrain-light.js && node --check src/catoid-build.js && node --check src/catoid-transfer.js && node --check src/catoid-worker.js && node --check scripts/build-static.mjs && node --check scripts/release-browser.mjs",
+    "test": "node scripts/verify-erosion.mjs && node scripts/verify.mjs && node scripts/verify-collisions.mjs && node scripts/verify-frame-work.mjs",
+    "bake:terrain": "node scripts/bake-heightfield.mjs",
+    "survey": "node scripts/survey-terrain.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "test:routes": "node scripts/fly-world.mjs",
+    "test:world": "node scripts/world-browser.mjs",
+    "test:air": "node scripts/atmosphere-browser.mjs",
+    "test:startup": "node scripts/startup-browser.mjs",
+    "test:controls": "node scripts/controls-browser.mjs",
+    "test:collisions": "node scripts/collision-browser.mjs",
+    "bench:heightfield": "node scripts/benchmark-heightfield.mjs",
+    "test:quality": "node scripts/quality-browser.mjs",
+    "test:release": "node scripts/release-browser.mjs"
+  }
+}
