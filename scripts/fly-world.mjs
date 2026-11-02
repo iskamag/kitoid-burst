@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import * as T from '../vendor/three.module.js';
-import {writeFile} from 'node:fs/promises';
+import {mkdir,writeFile} from 'node:fs/promises';
 import {createTerrain,createCircuit,heightAt,sweepGround} from '../src/terrain.js';
 import {pilotState,stepPilot} from '../src/flight.js';
 import {routePoint,routeTangent,corridorAt,ROUTE_LENGTH,ARCH_SITES,crossedGate,COURSES,ROOT_REGION,worldRegion} from '../src/world.js';
@@ -33,4 +33,5 @@ function run(courseIndex,reach=ROOT_REGION){
 }
 for(let i=0;i<COURSES.length;i++)run(i);
 run(0,worldRegion(21600,-14400));
+await mkdir('artifacts',{recursive:true});
 await writeFile('artifacts/world-flight-check.json',JSON.stringify({passed:true,results},null,2));
